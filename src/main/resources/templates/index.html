@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="layouts/main">
+<body>
+<div layout:fragment="content">
+    <div class="row row-cols-3 g-2 mt-5">
+        <div class="col" th:each="request : ${requestList}">
+            <div class="border border-success p-3">
+                <div class="d-flex fw-bold">
+                    <h5 th:if="${!request.isHandled()}" th:text="'*(Новая)'" style="color: red;"></h5>
+                    <h5 th:text="'Заявка от ' + ${request.userName}"></h5>
+                </div>
+                <h6 th:text="'Курс: ' + ${request.course}" class="text-success mt-2 mb-2"></h6>
+                <p th:text="${request.comment}"></p>
+                <div class="d-flex align-self-center">
+                    <p th:text="'Тел: ' + ${request.phone}"></p>
+                    <a th:href="@{'/handle-request/' + ${request.getId()}}" class="mx-3">Подробнее</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
